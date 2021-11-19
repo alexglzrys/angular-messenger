@@ -8,10 +8,10 @@ import { User } from 'src/app/shared/interfaces/user/user';
 })
 export class HomeComponent implements OnInit {
 
-  users: User[];
+  friends: User[];
 
   constructor() {
-    let myUser = {
+    let user1: User = {
       nick: 'Alejandro',
       subnick: 'alex',
       age: 36,
@@ -19,8 +19,40 @@ export class HomeComponent implements OnInit {
       email: 'alejandro@correo.com',
       uid: '1'
     }
-    this.users = [myUser]
-    console.log(this.users)
+    let user2: User = {
+      nick: 'Daniela',
+      subnick: 'dann',
+      age: 36,
+      friend: false,
+      email: 'daniela@correo.com',
+      uid: '2'
+    }
+    let user3: User = {
+      nick: 'Fernanda',
+      subnick: 'fer',
+      age: 36,
+      friend: false,
+      email: 'fernanda@correo.com',
+      uid: '3'
+    }
+    let user4: User = {
+      nick: 'Melissa',
+      subnick: 'meli',
+      age: 36,
+      friend: false,
+      email: 'melissa@correo.com',
+      uid: '4'
+    }
+    let user5: User = {
+      nick: 'Pedro',
+      subnick: 'piter',
+      age: 36,
+      friend: false,
+      email: 'pedro@correo.com',
+      uid: '5'
+    }
+    this.friends = [user1, user2, user3, user4, user5]
+    console.log(this.friends)
   }
 
   ngOnInit(): void {
