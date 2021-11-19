@@ -1,3 +1,16 @@
-<div *ngFor="let friend of friends; index as i">
-  <p>{{ i }} - {{ friend.nick }} - {{ friend.email }}</p>
-</div>
+<h3>Tus amigos</h3>
+<!-- No se puede declarar mas de una directiva estructural en un solo elemento, para ello ng-container nos puede ayudar para no generar tags html anidados  -->
+<ng-container *ngFor="let friend of friends; index as i">
+  <div *ngIf="friend.isFriend">
+    <p>{{ i }} - {{ friend.nick }} - {{ friend.email }}</p>
+  </div>
+</ng-container>
+
+<h3>No agregados</h3>
+<ng-container *ngFor="let friend of friends; index as i">
+  <div *ngIf="!friend.isFriend">
+    <p>{{ i }} - {{ friend.nick }} - {{ friend.email }}</p>
+  </div>
+</ng-container>
+
+
