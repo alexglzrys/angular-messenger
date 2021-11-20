@@ -1,7 +1,11 @@
 .login {
-  background-image: url('/assets/img/msnbg.jpg');
-  background-size: contain;
+  background-image: url('/assets/img/msnbg_tall.jpg');
+  background-size: cover;
   background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  margin-top: 90px;
+  min-height: calc(100vh - 90px);
   &__avatar {
     display: block;
   }
@@ -13,4 +17,7 @@
     border: 1px solid rgba(255,255,255,.36);
     box-shadow: 3px 3px 21px 1px rgb(159, 159, 159);
   }
+}
+.row {
+  padding: 1rem 0;
 }

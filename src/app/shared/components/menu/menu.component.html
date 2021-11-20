@@ -1,6 +1,13 @@
-<img src="assets/img/logo_live.png" alt="Angular Messenger" class="logo">
-<ul>
-  <li><a [routerLink]="['/home']"><i class="fas fa-home"></i> Home</a></li>
-  <li><a [routerLink]="['/login']"><i class="fas fa-sign-in-alt"></i> Login</a></li>
-  <li><a [routerLink]="['/profile']"><i class="fas fa-user-circle"></i> Profile</a></li>
-</ul>
+<header>
+  <div class="container d-flex align-items-center">
+    <div [routerLink]="['/home']">
+      <img src="assets/img/logo_live.png" alt="Angular Messenger" class="logo me-4">
+    </div>
+    <ul class="d-flex list-unstyled align-items-center p-0 m-0">
+      <li><a [routerLink]="['/home']"><i class="fas fa-home"></i> Home</a></li>
+      <li><a [routerLink]="['/login']"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+      <li><a [routerLink]="['/profile']"><i class="fas fa-user-circle"></i> Profile</a></li>
+    </ul>
+  </div>
+</header>
+

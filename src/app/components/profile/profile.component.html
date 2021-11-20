@@ -1,1 +1,41 @@
-<p>profile works!</p>
+<div class="profile">
+  <div class="container">
+    <div class="row p-5">
+      <div class="col-md-3">
+        <img src="assets/img/generic_avatar.png" alt="Avatar" class="img-fluid img-avatar">
+        <div class="mt-5">
+          <span class="change-foto d-block">Cambiar Foto</span>
+          <label for="archivo" class="custom-file">
+            <input type="file" id="archivo">
+            Subir Foto
+          </label>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="mb-3">
+          <label for="nick">Nick</label>
+          <input type="text" id="nick" name="nick" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="subnick">SubNick</label>
+          <input type="text" id="subnick" name="subnick" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" disabled class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="status">Status</label>
+          <select name="status" id="status" class="form-select">
+            <option value="" disabled selected>Seleccione una opción</option>
+            <option value="online">Conectado</option>
+            <option value="offline">Desconectado</option>
+            <option value="busy">Ocupado</option>
+            <option value="away">Ausente</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>

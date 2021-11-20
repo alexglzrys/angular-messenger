@@ -1,14 +1,45 @@
-<!-- El modelo query será el encargado de contener el valor dinámico para filtrar la lista de amigos mediante el pipe search -->
-<input type="text" placeholder="Buscar amigo" [(ngModel)]="query">
-<br>
-<h3>Tus amigos</h3>
-<!-- No se puede declarar mas de una directiva estructural en un solo elemento, para ello ng-container nos puede ayudar para no generar tags html anidados  -->
-<!-- Search recibe como valor la lista de amigos y como argmento el valor a filtrar -->
-<ng-container *ngFor="let friend of friends | search: query; index as i">
-  <div>
-    <a [routerLink]="['/conversation', friend.uid]">{{ i }} - {{ friend.nick }} - {{ friend.email }}</a>
+<div class="home">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-auto">
+        <div class="avatar">
+          <img src="assets/img/generic_avatar.png" alt="Avatar" class="avatar">
+        </div>
+      </div>
+      <div class="col">
+        <strong>Alejandro</strong>
+        <div>
+          <span>Online</span>
+          <br>
+          <span>< Escribe un mensaje personal ></span>
+        </div>
+      </div>
+    </div>
+    <div class="row pt-0">
+      <div class="col">
+        <!-- El modelo query será el encargado de contener el valor dinámico para filtrar la lista de amigos mediante el pipe search -->
+        <input type="text" class="form-control" placeholder="Buscar amigo" [(ngModel)]="query">
+      </div>
+      <div class="col-md-auto">
+        <img src="assets/img/logo_live_add.png" alt="Icono" class="img-add">
+      </div>
+    </div>
+    <h3 class="mb-4">Tus amigos</h3>
+    <!-- No se puede declarar mas de una directiva estructural en un solo elemento, para ello ng-container nos puede ayudar para no generar tags html anidados  -->
+    <!-- Search recibe como valor la lista de amigos y como argmento el valor a filtrar -->
+    <ng-container *ngFor="let friend of friends | search: query; index as i">
+      <div>
+        <a [routerLink]="['/conversation', friend.uid]" class="friend-link">
+          <img src="assets/img/logo_live_online.png" alt="Online" class="img-icon">
+          <strong>{{ friend.nick }}</strong> - {{ friend.subnick || 'No subnick' }}
+          <small>{{ friend.email }}</small>
+        </a>
+      </div>
+    </ng-container>
   </div>
-</ng-container>
+</div>
+
+
 
 
 

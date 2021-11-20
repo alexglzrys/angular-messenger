@@ -1,0 +1,30 @@
+.profile {
+  background-image: url('/assets/img/msnbg_tall.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  margin-top: 90px;
+  min-height: calc(100vh - 90px);
+}
+.custom-file {
+  background-color: #f9f9f9;
+  padding: .5rem 1rem;
+  cursor: pointer;
+  display: inline-block;
+  margin: .5rem 0;
+  border-radius: 5px;
+  color: dimgray;
+  input {
+    display: none;
+  }
+}
+.img-avatar {
+  /*max-width: 120px;*/
+  height: auto;
+  background-color: rgba(103, 213, 103, .80);
+  padding: .5rem;
+  border-radius: .5rem;
+  display: block;
+  box-shadow: 0 0 10px 2px gray;
+}
