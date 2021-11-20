@@ -1,0 +1,16 @@
+.login {
+  background-image: url('/assets/img/msnbg.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  &__avatar {
+    display: block;
+  }
+  .avatar--offline {
+    background: rgb(129,129,129);
+    background: linear-gradient(0deg, rgb(240, 240, 240) 0%, rgb(218, 218, 218) 100%);
+    padding: .8rem;
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,.36);
+    box-shadow: 3px 3px 21px 1px rgb(159, 159, 159);
+  }
+}

@@ -1,1 +1,34 @@
-<p>login works!</p>
+<div class="login">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-md-3">
+        <div class="avatar--offline my-4">
+          <img src="assets/img/generic_avatar.png" alt="Avatar genérico" class="login__avatar img-fluid">
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col-md-6">
+        <div class="text-center">
+          <h3>Iniciar Sesión</h3>
+        </div>
+        <p>Ya tienes cuenta? Has <a href="#" (click)="changeOperation($event, 'login')">click aquí</a> - No tienes cuenta? Registrate <a href="#" (click)="changeOperation($event, 'register')">aquí</a></p>
+        <form>
+          <div class="mb-3">
+            <input type="email" placeholder="Ingrese email" class="form-control">
+          </div>
+          <div class="mb-3">
+            <input type="password" placeholder="Ingrese contraseña" class="form-control">
+          </div>
+          <div class="mb-3">
+            <input type="text" *ngIf="operation === 'register'" placeholder="Ingrese nick" class="form-control">
+          </div>
+          <div class="text-center mt-4">
+            <a href="" *ngIf="operation === 'login'" class="btn btn-primary">Iniciar Sesión</a>
+            <a href="" *ngIf="operation === 'register'" class="btn btn-primary">Registrarme</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

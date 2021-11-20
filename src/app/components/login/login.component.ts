@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
+  operation: string = 'login'
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  changeOperation(event: Event, value: string) {
+    event.preventDefault()
+    event.stopPropagation()
+
+    this.operation = value;
   }
 
 }
