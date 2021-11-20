@@ -12,6 +12,7 @@ export class ConversationComponent implements OnInit {
 
   friendId!: string;  // Indicarle a TS que confie en nosotros, esta propiedad va a tener un string (marca error por no inicializarla aqui o en constructor)
   friend!: User | undefined;
+
   constructor(private activatedRoute: ActivatedRoute,
               private friendsService: FriendsService) { }
 

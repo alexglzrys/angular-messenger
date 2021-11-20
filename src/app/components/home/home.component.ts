@@ -10,6 +10,7 @@ import { User } from 'src/app/shared/interfaces/user/user';
 export class HomeComponent implements OnInit {
 
   friends!: User[];
+  query: string = ''
 
   constructor(private friendsService: FriendsService) { }
 

@@ -1,16 +1,14 @@
+<!-- El modelo query será el encargado de contener el valor dinámico para filtrar la lista de amigos mediante el pipe search -->
+<input type="text" placeholder="Buscar amigo" [(ngModel)]="query">
+<br>
 <h3>Tus amigos</h3>
 <!-- No se puede declarar mas de una directiva estructural en un solo elemento, para ello ng-container nos puede ayudar para no generar tags html anidados  -->
-<ng-container *ngFor="let friend of friends; index as i">
-  <div *ngIf="friend.isFriend">
+<!-- Search recibe como valor la lista de amigos y como argmento el valor a filtrar -->
+<ng-container *ngFor="let friend of friends | search: query; index as i">
+  <div>
     <a [routerLink]="['/conversation', friend.uid]">{{ i }} - {{ friend.nick }} - {{ friend.email }}</a>
   </div>
 </ng-container>
 
-<h3>No agregados</h3>
-<ng-container *ngFor="let friend of friends; index as i">
-  <div *ngIf="!friend.isFriend">
-    <a [routerLink]="['conversation', friend.uid]">{{ i }} - {{ friend.nick }} - {{ friend.email }}</a>
-  </div>
-</ng-container>
 
 
