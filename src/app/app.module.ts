@@ -15,6 +15,7 @@ import { MenuComponent } from './shared/components/menu/menu.component';
 import { SearchPipe } from './shared/pipes/search/search.pipe';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 
 @NgModule({
@@ -30,9 +31,10 @@ import { environment } from '../environments/environment';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
+    FormsModule,  // Soportar ngModel
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    ImageCropperModule, // Modulo de terceros para cortar imagenes en Angular
   ],
   providers: [],
   bootstrap: [AppComponent]   // El componente que se muestra inicialmente en nuestra app (No se recomienda cambiarlo, mejor por ruteo y redireccionamiento)

@@ -6,4 +6,5 @@ export interface User {
   isFriend?: boolean
   uid: string | undefined;
   status?: string;
+  avatar?: string
 }
