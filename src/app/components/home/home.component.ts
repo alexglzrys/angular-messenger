@@ -12,7 +12,8 @@ import { User } from 'src/app/shared/interfaces/user/user';
 export class HomeComponent implements OnInit {
 
   friends!: User[];
-  query: string = ''
+  query: string = '';
+  user!: User | undefined;
 
   constructor(private friendsService: FriendsService,
               private authService: AuthService,
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchFriends()
+    this.loadDataUser()
   }
 
   fetchFriends() {
@@ -29,6 +31,14 @@ export class HomeComponent implements OnInit {
         temporal.push(doc.data())
       })
       this.friends = [...temporal]
+    })
+  }
+
+  loadDataUser() {
+    this.authService.getStatus().subscribe(status => {
+      this.friendsService.searchFriend(status?.uid).subscribe(resp => {
+        this.user = resp.data();
+      })
     })
   }
 
