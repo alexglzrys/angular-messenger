@@ -4,6 +4,7 @@ import { ConversationComponent } from './components/conversation/conversation.co
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { AuthGuard } from './core/guards/auth/auth.guard';
 
 // Rutas principales de la aplicación
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
+    canActivate: [AuthGuard],
     component: HomeComponent
   },
   {

@@ -12,6 +12,8 @@
           <span>Online</span>
           <br>
           <span>< Escribe un mensaje personal ></span>
+          <br>
+          <button class="btn btn-secondary mt-2" (click)="logout()">Cerrar Sesión</button>
         </div>
       </div>
     </div>
@@ -25,17 +27,21 @@
       </div>
     </div>
     <h3 class="mb-4">Tus amigos</h3>
-    <!-- No se puede declarar mas de una directiva estructural en un solo elemento, para ello ng-container nos puede ayudar para no generar tags html anidados  -->
-    <!-- Search recibe como valor la lista de amigos y como argmento el valor a filtrar -->
-    <ng-container *ngFor="let friend of friends | search: query; index as i">
-      <div>
-        <a [routerLink]="['/conversation', friend.uid]" class="friend-link">
-          <img src="assets/img/logo_live_online.png" alt="Online" class="img-icon">
-          <strong>{{ friend.nick }}</strong> - {{ friend.subnick || 'No subnick' }}
-          <small>{{ friend.email }}</small>
-        </a>
-      </div>
+    <ng-container *ngIf="friends">
+      <!-- No se puede declarar mas de una directiva estructural en un solo elemento, para ello ng-container nos puede ayudar para no generar tags html anidados  -->
+      <!-- Search recibe como valor la lista de amigos y como argmento el valor a filtrar -->
+      <ng-container *ngFor="let friend of friends | search: query; index as i">
+        <div>
+          <a [routerLink]="['/conversation', friend.uid]" class="friend-link">
+            <img src="assets/img/logo_live_online.png" alt="Online" class="img-icon">
+            <strong>{{ friend.nick }}</strong> - {{ friend.subnick || 'No subnick' }}
+            <small>{{ friend.email }}</small>
+          </a>
+        </div>
+      </ng-container>
     </ng-container>
+
+
   </div>
 </div>
 
