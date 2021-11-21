@@ -15,17 +15,17 @@
         <p>Ya tienes cuenta? Has <a href="#" (click)="changeOperation($event, 'login')">click aquí</a> - No tienes cuenta? Registrate <a href="#" (click)="changeOperation($event, 'register')">aquí</a></p>
         <form>
           <div class="mb-3">
-            <input type="email" placeholder="Ingrese email" class="form-control">
+            <input type="email" name="email" placeholder="Ingrese email" [(ngModel)]="email" class="form-control">
           </div>
           <div class="mb-3">
-            <input type="password" placeholder="Ingrese contraseña" class="form-control">
+            <input type="password" name="password" placeholder="Ingrese contraseña" [(ngModel)]="password" class="form-control">
           </div>
           <div class="mb-3">
-            <input type="text" *ngIf="operation === 'register'" placeholder="Ingrese nick" class="form-control">
+            <input type="text" name="nick" *ngIf="operation === 'register'" placeholder="Ingrese nick" class="form-control">
           </div>
           <div class="text-center mt-4">
-            <a href="" *ngIf="operation === 'login'" class="btn btn-primary">Iniciar Sesión</a>
-            <a href="" *ngIf="operation === 'register'" class="btn btn-primary">Registrarme</a>
+            <a href="#" (click)="login($event)" *ngIf="operation === 'login'" class="btn btn-primary">Iniciar Sesión</a>
+            <a href="#" (click)="register($event)" *ngIf="operation === 'register'" class="btn btn-primary">Registrarme</a>
           </div>
         </form>
       </div>
