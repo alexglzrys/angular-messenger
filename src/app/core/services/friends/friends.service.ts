@@ -73,8 +73,12 @@ export class FriendsService {
     return this.angularFirestore.collection<User>('users').get()
   }
 
-  searchFriend(uid: string): Observable<firebase.firestore.DocumentSnapshot<User>> {
+  searchFriend(uid: string | undefined): Observable<firebase.firestore.DocumentSnapshot<User>> {
     return this.angularFirestore.collection('users').doc<User>(uid).get()
+  }
+
+  updateUser(user: User): Promise<void> {
+    return this.angularFirestore.collection('users').doc(user.uid).update(user)
   }
 
 }

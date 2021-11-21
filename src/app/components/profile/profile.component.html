@@ -12,29 +12,32 @@
         </div>
       </div>
       <div class="col-md-9">
-        <div class="mb-3">
-          <label for="nick">Nick</label>
-          <input type="text" id="nick" name="nick" class="form-control">
-        </div>
-        <div class="mb-3">
-          <label for="subnick">SubNick</label>
-          <input type="text" id="subnick" name="subnick" class="form-control">
-        </div>
-        <div class="mb-3">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" disabled class="form-control">
-        </div>
-        <div class="mb-3">
-          <label for="status">Status</label>
-          <select name="status" id="status" class="form-select">
-            <option value="" disabled selected>Seleccione una opción</option>
-            <option value="online">Conectado</option>
-            <option value="offline">Desconectado</option>
-            <option value="busy">Ocupado</option>
-            <option value="away">Ausente</option>
-          </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <ng-container *ngIf="user">
+          <div class="mb-3">
+            <label for="nick">Nick</label>
+            <input type="text" id="nick" name="nick" [(ngModel)]="user.nick" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="subnick">SubNick</label>
+            <input type="text" id="subnick" name="subnick" [(ngModel)]="user.subnick" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" [(ngModel)]="user.email" disabled class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="status">Status</label>
+            <select name="status" id="status" [(ngModel)]="user.status" class="form-select">
+              <option value="" disabled selected>Seleccione una opción</option>
+              <option value="online">Conectado</option>
+              <option value="offline">Desconectado</option>
+              <option value="busy">Ocupado</option>
+              <option value="away">Ausente</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary" (click)="saveSettings()">Guardar</button>
+        </ng-container>
+
       </div>
     </div>
   </div>
