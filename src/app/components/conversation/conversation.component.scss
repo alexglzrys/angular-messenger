@@ -1,0 +1,10 @@
+.conversation {
+  background-image: url('/assets/img/msnbg_tall.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  margin-top: 90px;
+  min-height: calc(100vh - 90px);
+  padding: 2rem 0;
+}

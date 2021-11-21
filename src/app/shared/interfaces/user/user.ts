@@ -3,6 +3,6 @@ export interface User {
   subnick?: string;   // Datos no obligatorios ?
   age?: number;
   email: string;
-  isFriend: boolean
-  uid: string;
+  isFriend?: boolean
+  uid: string | undefined;
 }

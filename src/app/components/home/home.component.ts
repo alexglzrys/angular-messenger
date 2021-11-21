@@ -19,7 +19,21 @@ export class HomeComponent implements OnInit {
   }
 
   fetchFriends() {
-    this.friends = this.friendsService.getAllFriends();
+    let temporal!: User[];
+    this.friendsService.listFriends().subscribe(resp => {
+      resp.forEach(doc => {
+        temporal.push(doc.data())
+      })
+      this.friends = [...temporal]
+    })
+    /*this.friendsService.listFriends().subscribe(resp => {
+      resp.docs.forEach(doc => {
+        temporal.push(doc.data())
+        console.log(doc.data());
+      })
+      //this.friends = [...temporal]
+
+    })*/
   }
 
 }

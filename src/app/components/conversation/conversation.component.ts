@@ -26,7 +26,13 @@ export class ConversationComponent implements OnInit {
   }
 
   fetchFriend(uid: string) {
-    this.friend = this.friendsService.getFriend(uid);
+    //this.friend = this.friendsService.getFriend(uid);
+    this.friendsService.searchFriend(uid).subscribe(resp => {
+      if (resp.exists) {
+        console.log(resp.data());
+        this.friend = resp.data();
+      }
+    })
   }
 
 }

@@ -21,7 +21,7 @@
             <input type="password" name="password" placeholder="Ingrese contraseña" [(ngModel)]="password" class="form-control">
           </div>
           <div class="mb-3">
-            <input type="text" name="nick" *ngIf="operation === 'register'" placeholder="Ingrese nick" class="form-control">
+            <input type="text" name="nick" *ngIf="operation === 'register'" placeholder="Ingrese nick" [(ngModel)]="nick" class="form-control">
           </div>
           <div class="text-center mt-4">
             <a href="#" (click)="login($event)" *ngIf="operation === 'login'" class="btn btn-primary">Iniciar Sesión</a>

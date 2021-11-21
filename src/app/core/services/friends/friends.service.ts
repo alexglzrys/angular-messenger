@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/shared/interfaces/user/user';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import firebase from 'firebase/compat/app';
+import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'    // presente en cualquier componente, no es necesario inyectarlo de forma explicita en los providers de app.module
@@ -8,7 +12,7 @@ export class FriendsService {
 
   friends: User[];
 
-  constructor() {
+  constructor(private angularFirestore: AngularFirestore) {
     let user1: User = {
       nick: 'Alejandro',
       subnick: 'alex',
@@ -54,10 +58,23 @@ export class FriendsService {
 
   getAllFriends(): User[] {
     return [...this.friends];
+
   }
 
   getFriend(uid: string): User | undefined {
     return this.friends.find((friend: User) => friend.uid === uid);
+  }
+
+  registerFriend(user: User): Promise<void> {
+    return this.angularFirestore.collection('/users').doc(user.uid).set(user);
+  }
+
+  listFriends(): Observable <firebase.firestore.QuerySnapshot<User>> {
+    return this.angularFirestore.collection<User>('users').get()
+  }
+
+  searchFriend(uid: string): Observable<firebase.firestore.DocumentSnapshot<User>> {
+    return this.angularFirestore.collection('users').doc<User>(uid).get()
   }
 
 }

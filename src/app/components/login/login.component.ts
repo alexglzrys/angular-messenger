@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { FriendsService } from 'src/app/core/services/friends/friends.service';
+import { User } from 'src/app/shared/interfaces/user/user';
 
 @Component({
   selector: 'app-login',
@@ -11,8 +14,11 @@ export class LoginComponent implements OnInit {
   operation: string = 'login'
   email: string = '';
   password: string = ''
+  nick: string = ''
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+              private friendsService: FriendsService,
+              private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -30,9 +36,10 @@ export class LoginComponent implements OnInit {
 
     this.authService.loginWithEmail(this.email, this.password).then(response => {
       console.log(response);
-      console.log('logeado correctamente');
-    }).catch(error => {
-      console.log(error);
+      // Navegar al home
+      this.router.navigate(['/home'])
+    }).catch(errors => {
+      console.log(errors);
       console.log('Error al logear');
     })
   }
@@ -40,10 +47,18 @@ export class LoginComponent implements OnInit {
   register(event: Event) {
     event.preventDefault()
     event.stopPropagation()
-
+    // Registrar el usuario
     this.authService.registerWithEmail(this.email, this.password).then(response => {
-      console.log(response);
-      console.log('registrado correctamente');
+      const myUser: User = {
+        uid: response.user?.uid,
+        email: this.email,
+        nick: this.nick
+      }
+      // Guardar su información en la base de datos
+      this.friendsService.registerFriend(myUser).then(data => {
+        this.router.navigate(['/login'])
+      })
+
     }).catch(error => {
       console.log(error);
       console.log('Error al registrar');
