@@ -1,5 +1,5 @@
-<!-- Menú -->
-<app-menu></app-menu>
+<!-- Mostrar siempre y cuando la ruta actual no sea /login -->
+<app-menu *ngIf="router.url !== '/login'"></app-menu>
 
 <!-- Salida componentes enlazados al router -->
 <router-outlet></router-outlet>
