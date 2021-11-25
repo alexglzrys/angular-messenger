@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireModule } from '@angular/fire/compat';
 
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,6 +34,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     FormsModule,  // Soportar ngModel
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    AngularFireStorageModule,
     ImageCropperModule, // Modulo de terceros para cortar imagenes en Angular
   ],
   providers: [],

@@ -3,6 +3,7 @@ import { ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { FriendsService } from 'src/app/core/services/friends/friends.service';
 import { User } from 'src/app/shared/interfaces/user/user';
+import { StorageService } from 'src/app/core/services/storage/storage.service';
 
 @Component({
   selector: 'app-profile',
@@ -18,7 +19,8 @@ export class ProfileComponent implements OnInit {
   showAreaCrop: boolean = false
 
   constructor(private friendsService: FriendsService,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private storage: StorageService) { }
 
   ngOnInit(): void {
     this.authService.getStatus().subscribe(status => {
@@ -30,11 +32,25 @@ export class ProfileComponent implements OnInit {
   }
 
   saveSettings() {
-    this.friendsService.updateUser(this.user!).then(resp => {
-      alert('Datos cambiados')
-    }).catch(err => {
-      alert('Error tras actualizar el perfil')
-    })
+    if (this.croppedImage !== 'assets/img/generic_avatar.png') {
+      // Guardar la imagen cortada en firebase storage
+      this.storage.uploadAvatar(this.croppedImage).subscribe(resp => {
+        console.log(resp)
+        // Registrar la URL de imagen como parte del registro del usuario
+        this.friendsService.setAvatar(resp, this.user?.uid).then(response => {
+          alert('Avatar cambiados')
+        }).catch(err => {
+          alert('Error tras actualizar el avatar')
+        })
+      })
+    } else {
+      // Guardar los datos que están en el formulario
+      this.friendsService.updateUser(this.user!).then(resp => {
+        alert('Datos cambiados')
+      }).catch(err => {
+        alert('Error tras actualizar el perfil')
+      })
+    }
   }
 
   fileChangeEvent(event: any): void {

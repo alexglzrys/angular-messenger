@@ -3,6 +3,7 @@ import { User } from 'src/app/shared/interfaces/user/user';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
 import { Observable } from 'rxjs';
+import { UploadTaskSnapshot } from '@angular/fire/compat/storage/interfaces';
 
 
 @Injectable({
@@ -81,4 +82,7 @@ export class FriendsService {
     return this.angularFirestore.collection('users').doc(user.uid).update(user)
   }
 
+  setAvatar(avatar: string | UploadTaskSnapshot | undefined, uid: string | undefined): Promise<void> {
+    return this.angularFirestore.collection('users').doc(uid).update({avatar: avatar})
+  }
 }
