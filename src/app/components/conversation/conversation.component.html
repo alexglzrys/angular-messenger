@@ -6,7 +6,14 @@
 
     <div class="row">
       <div class="col-2"></div>
-      <div class="col-10"></div>
+      <div class="col-10">
+        <div class="message" *ngFor="let message of conversation">
+          <p><strong>{{ getUserNickById(message.sender) }}</strong> dice:
+            <br>
+            <span>{{ message.text }}</span>
+           </p>
+        </div>
+      </div>
     </div>
     <div class="row">
       <div class="col-2"></div>

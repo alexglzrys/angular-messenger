@@ -17,6 +17,7 @@ export class ConversationComponent implements OnInit {
   user!: User | undefined;
   conversation_id!: string;
   textMessage!: string
+  conversation!: any[]
 
   constructor(private activatedRoute: ActivatedRoute,
               private friendsService: FriendsService,
@@ -48,6 +49,7 @@ export class ConversationComponent implements OnInit {
               // Esto nos permite en el futuro agrupar las conversaciones que han tenido dos amigos durante la historia
               const ids = [this.user?.uid, this.friend?.uid].sort()
               this.conversation_id = ids.join('-')  // el hash resultate sera isdnsdisdis-qwesddsdsd
+              this.getConversation(this.conversation_id)
             }
           })
         })
@@ -71,6 +73,40 @@ export class ConversationComponent implements OnInit {
     }).catch(err => {
       console.log(err)
     })
+  }
+
+  getConversation(uid: any) {
+    // Obtener todas las conversaciones de estos dos amigos
+    this.conversationService.getConversation(uid).subscribe((res) => {
+      let temporal: any[] = []
+      res.forEach(doc => {
+        let message: any = doc.data()
+        // Verificar si el mensaje no ha sido visto (en este caso, es nuevo y se debe reproducir un sonido)
+        if (!message.seen) {
+          message.seen = true
+          // Actualizar el estado de visto en true para este mensaje en base de datos
+          this.conversationService.editConversation(message).then(() => {
+            const audio = new Audio('assets/sound/new_message.m4a')
+            audio.play()
+          })
+        }
+        temporal.push(message)
+      })
+      // Almacenar el listado de mensajes en el modelo de este componente
+      this.conversation = [...temporal]
+      console.log(temporal)
+    }, (error) => {
+      console.log(error)
+    })
+  }
+
+  // Recuperar el nickname del usuario que escribio el mensaje a partir de su uid
+  getUserNickById(uid: any) {
+    if (uid === this.friend?.uid) {
+      return this.friend?.nick
+    } else {
+      return this.user?.nick
+    }
   }
 
 }

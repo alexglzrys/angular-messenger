@@ -16,8 +16,15 @@ export class ConversationService {
     return this.angularFirestore.collection('conversations/' + conversation.uid + '/messages').doc(conversation.timestamp.toString()).set(conversation)
   }
 
-  getConversation(uid: any): Observable<firebase.firestore.DocumentSnapshot<unknown>> {
-    return this.angularFirestore.doc('conversation/' + uid).get();
+  getConversation(uid: any): Observable<firebase.firestore.QuerySnapshot<unknown>> {
+    // Recuperar el listado de conversaciones que han tenido dos amigos en el tiempo
+    return this.angularFirestore.collection('conversations/' + uid + '/messages').get();
+  }
+
+  editConversation(conversation: any): Promise<void> {
+    // Generar una colección de 3 niveles - el documento tiene como nombre la marca de tiempo del mensaje, y la conversación es su contenido
+    // El nombre del documento tiene que ser un string, por eso uso toString(). de lo contrario falla
+    return this.angularFirestore.collection('conversations/' + conversation.uid + '/messages').doc(conversation.timestamp.toString()).update(conversation)
   }
 
 }
