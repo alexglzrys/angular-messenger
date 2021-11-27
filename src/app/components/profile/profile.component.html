@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row p-5">
       <div class="col-md-3">
-        <img [src]="croppedImage" alt="Avatar" class="img-fluid img-avatar">
+        <img [src]="user?.avatar || croppedImage" alt="Avatar" class="img-fluid img-avatar">
         <div class="mt-5">
           <span class="change-foto d-block">Cambiar Foto</span>
           <label for="archivo" class="custom-file">

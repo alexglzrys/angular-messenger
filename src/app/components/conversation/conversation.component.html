@@ -3,6 +3,17 @@
     <h3>Usted esta conversando con: {{ friend?.nick}}</h3>
 
     <pre>{{ friend | json }}</pre>
+
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-10"></div>
+    </div>
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-10">
+        <textarea name="message" [(ngModel)]="textMessage" (keyup.enter)="sendMassage()"></textarea>
+      </div>
+    </div>
   </div>
 </div>
 
