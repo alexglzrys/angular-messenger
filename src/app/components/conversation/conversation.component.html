@@ -1,4 +1,4 @@
-<div class="conversation">
+<div class="conversation" [ngClass]="{'shaker': snake}">
   <div class="container">
     <h3>Usted esta conversando con: {{ friend?.nick}}</h3>
 
@@ -19,6 +19,7 @@
       <div class="col-2"></div>
       <div class="col-10">
         <textarea name="message" [(ngModel)]="textMessage" (keyup.enter)="sendMassage()"></textarea>
+        <img src="assets/img/zumbido.png" alt="Zumbido" (click)="sendZumbido()">
       </div>
     </div>
   </div>

@@ -18,6 +18,7 @@ export class ConversationComponent implements OnInit {
   conversation_id!: string;
   textMessage!: string
   conversation!: any[]
+  snake: boolean = false
 
   constructor(private activatedRoute: ActivatedRoute,
               private friendsService: FriendsService,
@@ -65,11 +66,36 @@ export class ConversationComponent implements OnInit {
       timestamp: Date.now(),
       text: this.textMessage,
       sender: this.user?.uid,
-      receiver: this.friend?.uid
+      receiver: this.friend?.uid,
+      type: 'text'
     }
     // Se envia el mensaje al servicio para que se registre en firebase, y limpiar el mensaje de la caja
     this.conversationService.createConversation(message).then(() => {
       this.textMessage = ''
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
+  sendZumbido() {
+    // El cuerpo del mensaje que se genera al momento de la conversación
+    // Importa mucho los ids de quien envia y recibe, la marca de tiempo en la cual se envio este mensaje, su contenido y su uid
+    const message = {
+      uid: this.conversation_id,
+      timestamp: Date.now(),
+      sender: this.user?.uid,
+      receiver: this.friend?.uid,
+      type: 'zumbido'
+    }
+    // Se envia el mensaje al servicio para que se registre en firebase, y limpiar el mensaje de la caja
+    this.conversationService.createConversation(message).then(() => {
+      // Una acción en particular (sacudir la pantalla)
+      // Snake activa una clase CSS que especifica la animación para un elemento dado
+      this.snake = true
+      window.setTimeout(() => {
+        // despues de 1 segundo, se retira la clase CSS
+        this.snake = false
+      }, 1000)
     }).catch(err => {
       console.log(err)
     })
@@ -80,15 +106,23 @@ export class ConversationComponent implements OnInit {
     this.conversationService.getConversation(uid).subscribe((res) => {
       let temporal: any[] = []
       res.forEach(doc => {
-        let message: any = doc.data()
+        // Como la suscripción fue registrada para escuchar cambios, no puedo recuperar la data como res.data()
+        let message: any = doc.payload.doc.data()
+        let audio: any;
         // Verificar si el mensaje no ha sido visto (en este caso, es nuevo y se debe reproducir un sonido)
         if (!message.seen) {
           message.seen = true
           // Actualizar el estado de visto en true para este mensaje en base de datos
           this.conversationService.editConversation(message).then(() => {
-            const audio = new Audio('assets/sound/new_message.m4a')
+            // Reproducir un sonido diferente para cada tipo de mensaje
+            if (message.type === 'text') {
+              audio = new Audio('assets/sound/new_message.m4a')
+            } else if (message.type === 'zumbido') {
+              audio = new Audio('assets/sound/zumbido.m4a')
+            }
             audio.play()
           })
+
         }
         temporal.push(message)
       })

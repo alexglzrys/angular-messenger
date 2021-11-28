@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore, DocumentChangeAction } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import firebase from 'firebase/compat/app';
 
@@ -16,9 +16,10 @@ export class ConversationService {
     return this.angularFirestore.collection('conversations/' + conversation.uid + '/messages').doc(conversation.timestamp.toString()).set(conversation)
   }
 
-  getConversation(uid: any): Observable<firebase.firestore.QuerySnapshot<unknown>> {
+  getConversation(uid: any): Observable<DocumentChangeAction<unknown>[]> {
     // Recuperar el listado de conversaciones que han tenido dos amigos en el tiempo
-    return this.angularFirestore.collection('conversations/' + uid + '/messages').get();
+    // en lugar de get(), uso snapshotChanges(); Ya que me interesa estar atento a los cambios para que se vean reflejados automáticamente en la pantalla
+    return this.angularFirestore.collection('conversations/' + uid + '/messages').snapshotChanges();
   }
 
   editConversation(conversation: any): Promise<void> {
