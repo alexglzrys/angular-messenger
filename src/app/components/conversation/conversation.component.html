@@ -1,12 +1,16 @@
 <div class="conversation" [ngClass]="{'shaker': snake}">
   <div class="container">
-    <h3>Usted esta conversando con: {{ friend?.nick}}</h3>
+    <h3 class="mb-5">Usted esta conversando con: {{ friend?.nick}}</h3>
 
-    <pre>{{ friend | json }}</pre>
+    <!-- <pre>{{ friend | json }}</pre> -->
 
-    <div class="row">
-      <div class="col-2"></div>
-      <div class="col-10">
+    <div class="row mb-5">
+      <div class="col-2">
+        <div class="avatar">
+          <img src="assets/img/generic_avatar.png" alt="Avatar" class="avatar">
+        </div>
+      </div>
+      <div class="col-10 view-messages">
         <div class="message" *ngFor="let message of conversation">
           <p><strong>{{ getUserNickById(message.sender) }}</strong> dice:
             <br>
@@ -16,10 +20,16 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-2"></div>
-      <div class="col-10">
-        <textarea name="message" [(ngModel)]="textMessage" (keyup.enter)="sendMassage()"></textarea>
-        <img src="assets/img/zumbido.png" alt="Zumbido" (click)="sendZumbido()">
+      <div class="col-2">
+        <div class="avatar">
+          <img src="assets/img/generic_avatar.png" alt="Avatar" class="avatar">
+        </div>
+      </div>
+      <div class="col-10 p-0">
+        <textarea name="message" class="editor" [(ngModel)]="textMessage" (keyup.enter)="sendMassage()"></textarea>
+        <div class="controls">
+          <img src="assets/img/zumbido.png" alt="Zumbido" (click)="sendZumbido()">
+        </div>
       </div>
     </div>
   </div>
