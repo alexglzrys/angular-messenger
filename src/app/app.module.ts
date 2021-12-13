@@ -16,6 +16,8 @@ import { SearchPipe } from './shared/pipes/search/search.pipe';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+//import { BootstrapAngularModule } from './bootstrap-angular/bootstrap-angular.module';
 
 
 @NgModule({
@@ -35,7 +37,10 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireStorageModule,
-    ImageCropperModule, // Modulo de terceros para cortar imagenes en Angular
+    ImageCropperModule,
+    NgbModule, // Modulo de terceros para cortar imagenes en Angular
+               // Modulo que contiene todos los componenes de NGBootstrap que deseo usar en mi aplicación
+
   ],
   providers: [],
   bootstrap: [AppComponent]   // El componente que se muestra inicialmente en nuestra app (No se recomienda cambiarlo, mejor por ruteo y redireccionamiento)
